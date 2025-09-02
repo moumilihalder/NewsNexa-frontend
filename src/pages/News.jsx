@@ -7,19 +7,21 @@ function News() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    if (!name) return; 
+  if (!name) return;
 
-    fetch(`http://localhost:5000/category/${name}`)
-      .then(async (res) => {
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(`HTTP ${res.status} - ${text}`);
-        }
-        return res.json();
-      })
-      .then((data) => setArticles(data.articles || []))
-      .catch((err) => console.error("Error fetching news:", err));
-  }, [name]);
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
+  fetch(`${API_BASE}/category/${name}`)
+    .then(async (res) => {
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`HTTP ${res.status} - ${text}`);
+      }
+      return res.json();
+    })
+    .then((data) => setArticles(data.articles || []))
+    .catch((err) => console.error("Error fetching news:", err));
+}, [name]);
 
   return (
     <div className="news-container">
