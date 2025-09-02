@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function CategoryPage() {
-  const { name } = useParams(); // category name from URL
+  const { name } = useParams(); 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  console.log("Using API:", BACKEND_URL);
   useEffect(() => {
     setLoading(true);
-    fetch(`${API_URL}/category/${name}`)
+    fetch(`${BACKEND_URL}/category/${name}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch news");
         return res.json();
