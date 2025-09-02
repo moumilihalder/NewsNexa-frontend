@@ -1,0 +1,24 @@
+
+.nav-container {
+  overflow-x: hidden;
+  align-content: center; 
+}
+
+.logo {
+  white-space: nowrap; 
+}
+
+ul {
+  flex-wrap: wrap; 
+}
+
+input {
+  max-width: 100%; 
+}
+
+@media (max-width: 640px) {
+  .nav-container {
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+}
