@@ -8,7 +8,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     const API_URL = process.env.REACT_APP_API_URL;
-
+    console.log("API URL:", API_URL);
     fetch(`${API_URL}/category/${name}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch news");
