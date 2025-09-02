@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function CategoryPage() {
-  const { name } = useParams(); // 'name' is your category
+  const { name } = useParams(); // category name from URL
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
   useEffect(() => {
-    const API_URL = process.env.REACT_APP_API_URL;
-    console.log("API URL:", API_URL);
+    setLoading(true);
     fetch(`${API_URL}/category/${name}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch news");
@@ -19,10 +20,10 @@ export default function CategoryPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching news:", err);
+        console.error("Error fetching:", err);
         setLoading(false);
       });
-  }, [name]);
+  }, [name, API_URL]);
 
   if (loading) return <p>Loading...</p>;
 
